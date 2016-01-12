@@ -28,18 +28,32 @@ fn main() {
         }
 
         let checks = vec!["children: 3".to_string(),
-                          "cats: 7".to_string(),
                           "samoyeds: 2".to_string(),
-                          "pomeranians: 3".to_string(),
                           "akitas: 0".to_string(),
                           "vizslas: 0".to_string(),
-                          "goldfish: 5".to_string(),
-                          "trees: 3".to_string(),
                           "cars: 2".to_string(),
                           "perfumes: 1".to_string()];
 
-        'inner: for check in &checks {
+        let greater_than = vec!["cats: 7".to_string(),
+                                "trees: 3".to_string()];
+
+        let less_than = vec!["goldfish: 5".to_string(),
+                             "pomeranians: 3".to_string()];
+
+        for check in &checks {
             if !advent_16::find_input(&line.to_string(), &check) {
+                continue 'outer;
+            }
+        }
+
+        for check in &greater_than {
+            if !advent_16::find_greater_than(&line.to_string(), &check) {
+                continue 'outer;
+            }
+        }
+
+        for check in &less_than {
+            if !advent_16::find_less_than(&line.to_string(), &check) {
                 continue 'outer;
             }
         }
